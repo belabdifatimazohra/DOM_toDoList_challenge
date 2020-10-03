@@ -65,7 +65,20 @@ function addNewTodo() {
 
 // 8. Ajouter un evenement pour delete afin de supprimer une task
 function deleteTodo() {
-    
 
-    
+    // Find the number of item on the to do list 
+    const nbItem = this.id.match(/[0-9]+/g);
+    console.log(nbItem);
+
+    // Delete the task from the listItem
+    listItem = listItem.filter(function (value, index, arr) {
+        return value !=
+            document.getElementById("itemTxt" + nbItem).innerText.toLowerCase();
+    });
+    //console.log(listItem);
+    // Get the child div by its id
+    var div = document.getElementById("item" + nbItem);
+    // Search for parent node and remove it from the document
+    div.parentNode.removeChild(div);
+
 }
