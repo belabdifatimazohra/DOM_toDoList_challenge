@@ -14,21 +14,29 @@ var listItem = [];
 addBtn.addEventListener("click", addNewTodo);
 //3. Ecrire la fonction addNewTodo qui commence par selectionner la classe todo - input
 function addNewTodo() {
-    console.log("clicked Add item: " + selectedItem.value);
+    //console.log("clicked Add item: " + selectedItem.value);
     if (selectedItem.value.length == 0) {
-        alert("Can't add an empty item!!");
+        alert("Can't add an empty task!!");
+    }
+    if (listItem.includes(selectedItem.value.toLowerCase())) {
+        alert("Task already exist");
     }
     else {
-        let element = document.querySelector('.todos-content');
+        listItem.push(selectedItem.value.toLowerCase());
+        let todosContent = document.querySelector('.todos-content');
+        nbItem += 1;
 
         // Create new div item
         const divItem = document.createElement('div');
         divItem.className = 'todo-item';
+        divItem.id = "item" + nbItem;
+        //console.log("item number " + divItem.id);
 
 
         // Create todo text new item
         const divTxt = document.createElement('div');
         divTxt.className = 'todo-text';
+        divTxt.id = "itemTxt" + nbItem;
         divTxt.innerHTML = '<h3>' + selectedItem.value + '</h3>'
 
         divItem.appendChild(divTxt);
@@ -36,6 +44,7 @@ function addNewTodo() {
         // Create todo check for the new item
         const divCheck = document.createElement('div');
         divCheck.className = 'todo-check';
+        divCheck.id = "itemCheck" + nbItem;
         divCheck.innerHTML = '<input type="checkbox">'
 
         divItem.appendChild(divCheck);
@@ -43,43 +52,20 @@ function addNewTodo() {
         // Create todo delete item
         const divDlt = document.createElement('div');
         divDlt.className = 'todo-delete';
+        divDlt.id = "itemDlt" + nbItem;
         divDlt.innerHTML = '<h3>Delete</h3>'
+        divDlt.addEventListener("click", deleteTodo)
 
         divItem.appendChild(divDlt);
 
         // Add to the  document the new item
-        element.appendChild(divItem);
+        todosContent.appendChild(divItem);
     }
 }
-//4. Creer une div newTodo et des div pour le texte a afficher et le checkbox ainsi que le texte Delete
-//cela en utilisant document.createElement(“div”)
 
-//pour div ou document.createElement(“input”) pour le input(checkbox est un input de type checkbox)
+// 8. Ajouter un evenement pour delete afin de supprimer une task
+function deleteTodo() {
+    
 
-//5. Affecter des classes a ces elements avec les noms todo - item, todo - text, todo - check et todo - delete (modifié)
-
-//6. inserer les div dans leur parent newTodo en utilisant appendChild(par exemple: newTodo.appendChild(newTodoText))
-
-//7. inserer newTodo dans todosContent
-
-//8. Ajouter un evenement pour delete afin de supprimer une task
-
-//9. ecrire la fonction deleteTodo qui supprime une task a partir de son index(les tasks seront dans un tableau avec index)
-
-
-// Remarques: utiliser les fonctions de DOM suivantes:
-
-// document.querySelector
-
-// document.createElement
-
-// setAttribute(“type”, “checkbox”)
-
-// appendChild
-//.className
-
-//.textContent
-
-// document.querySelectorAll
-
-// .addEventListener
+    
+}
